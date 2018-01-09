@@ -27,3 +27,39 @@ parrafoTres.appendChild(enlace);
 parrafoTres.href = 'https://www.google.com/';
 parrafoDos.innerHTML = 'Esto ha cambiado';
 parrafoCuatro.style.backgroundColor = '#fb0808';
+
+function getCookie(cookieName) {
+var name = cookieName + "=";
+var cookieParts = document.cookie.split(';');
+for (var i = 0; i < cookieParts.length; i++) {
+var cookieValue = cookieParts[i];
+while (cookieValue.charAt(0) === ' ') {
+cookieValue = cookieValue.substring(1);
+}
+if (cookieValue.indexOf(name) === 0) {
+return cookieValue.substring(name.length, cookieValue.length);
+}
+}
+return "";
+}
+
+function setCookie(cookieName, cookieValue, expiredDays) {
+var date = new Date();
+date.setTime(date.getTime() + (expiredDays * 24 * 60 * 60 * 1000));
+var expires = "expires=" + date.toUTCString();
+document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+}
+
+function checkCookie() {
+var user = getCookie('username');
+if (user != '') {
+alert('Hola de nuevo ' + user);
+} else {
+user = prompt('¿Cómo te llamas? ', '');
+if (user != '' && user != null) {
+setCookie('username', user, 365);
+}
+}
+}
+
+checkCookie();
